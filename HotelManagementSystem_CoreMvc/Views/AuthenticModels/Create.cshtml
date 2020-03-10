@@ -1,0 +1,96 @@
+﻿@model HotelManagementSystem_CoreMvc.Models.AuthenticModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>AuthenticModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                @{
+
+                    List<ApplicationRole> RollList = (List<ApplicationRole>)ViewData["RollList"];
+                }
+                <label asp-for="RoleId" class="control-label"></label>
+                <select name="RoleId" asp-items="@(new SelectList(RollList, "Id", "Name"))" class="form-control">
+                    <option value="">-- Select Role --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ControllerName" class="control-label"></label>
+                @*<input asp-for="ControllerName" class="form-control" />*@
+            <select asp-for="ControllerName" class="form-control">
+                <option value="">-- Select Controller --</option>
+                <option value="Admin">Admin</option>
+                <option value="AuthenticModels">Role Parmission</option>
+                <option value="Guests">Guests</option>
+                <option value="Rooms">Rooms</option>
+                <option value="Foods">Foods</option>
+                <option value="Reservasions">Reservasions</option>
+                <option value="OrderFoods">OrderFoods</option>
+                <option value="Bookings">Bookings</option>
+                <option value="RoomTypes">RoomTypes</option>
+                <option value="RoomQuantities">RoomQuantities</option>
+                <option value="BeddingTypes">BeddingTypes</option>
+                <option value="Adults">Adults</option>
+                <option value="Children">Children</option>
+            </select>
+            </div>
+
+
+            @*<div class="form-group">
+            <label asp-for="RoleId" class="control-label"></label>
+            <input asp-for="RoleId" class="form-control" />
+            <span asp-validation-for="RoleId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ControllerName" class="control-label"></label>
+            <select asp-for="ControllerName" class="form-control"></select>
+            <span asp-validation-for="ControllerName" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Retrive" /> @Html.DisplayNameFor(model => model.Retrive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Insert" /> @Html.DisplayNameFor(model => model.Insert)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Update" /> @Html.DisplayNameFor(model => model.Update)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Delete" /> @Html.DisplayNameFor(model => model.Delete)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

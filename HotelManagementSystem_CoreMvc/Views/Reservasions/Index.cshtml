@@ -1,0 +1,112 @@
+﻿@model PaginatedList<HotelManagementSystem_CoreMvc.Models.Reservasion>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "Reservasions", FormMethod.Post))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+        @*<input type="text" name="SearchString" class="form-control" />*@
+        <button type="submit" class="btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+    </p>
+
+}
+
+
+<p>
+    <a asp-action="Create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Arrival Date
+            </th>
+            <th>
+                @Html.ActionLink("Departure Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+                @*@Html.DisplayNameFor(model => model.DepartureDate)*@
+            </th>
+            <th>
+                @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th>
+                No of Adult
+            </th>
+            <th>
+                No of Child
+            </th>
+
+            <th>
+                Room Type
+            </th>
+            <th>
+                Room Quantity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Adult.NumberOfAdults)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Child.NumberOfChild)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Room.RoomTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomQuantity.NumberOfRoom)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ReservasionId"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.ReservasionId"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.ReservasionId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewBag.CurrentSort"
+   asp-route-page="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewBag.CurrentFilter"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewBag.CurrentSort"
+   asp-route-page="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewBag.CurrentFilter"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

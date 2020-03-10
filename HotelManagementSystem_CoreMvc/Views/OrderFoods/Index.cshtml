@@ -1,0 +1,80 @@
+﻿@model PaginatedList<HotelManagementSystem_CoreMvc.Models.OrderFood>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+</p>
+
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" class="form-control" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-default" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Guest Name</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Food Name</a>
+            </th>
+            <th>
+                Quntity
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Guest.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Food.FoodName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quntity)
+                </td>
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.OrderId."><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.OrderId"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrderId"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

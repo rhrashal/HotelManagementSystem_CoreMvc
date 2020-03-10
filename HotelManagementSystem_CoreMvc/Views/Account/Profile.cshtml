@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@model IdentityUser
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h2>Profile</h2>
+<table class="table table-condensed table-bordered" header header-content="User Management">
+    <tr>
+        <th>User ID</th>
+        <th>User name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.UserName</td>
+        <td>@Model.Email</td>
+        <td>
+            <form asp-action="DeleteProfile" asp-route-id="@Model.Id" method="post">
+                <a class="btn btn-sm btn-primary" asp-action="EditProfile" asp-route-id="@Model.Id">Edit</a>
+                <button type="submit" onclick="return confirm('Do you really want to delete this user?');" class="btn btn-sm btn-danger">
+                    Delete
+                </button>
+            </form>
+        </td>
+    </tr>
+
+</table>

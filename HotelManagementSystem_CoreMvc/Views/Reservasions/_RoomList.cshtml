@@ -1,0 +1,53 @@
+﻿@model HotelManagementSystem_CoreMvc.Models.GeustReserveRoom
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                RoomTypeName
+            </th>
+            <th>
+                ImageUrl
+            </th>
+            <th>
+                Price
+            </th>
+            @*<th>
+               BeddingType
+            </th>
+            <th>
+                RoomType
+            </th>*@
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomTypeName)
+                </td>
+                <td>
+                    <img src="@Url.Content(item.ImageUrl)" height="100" width="100" class="img-circle" />
+                    @*@Html.DisplayFor(modelItem => item.ImageUrl)*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.BeddingType.BeddingTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomType.RoomTypeName)
+                </td>*@
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.RoomId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RoomId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RoomId">Delete</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,81 @@
+﻿@model IEnumerable<HotelManagementSystem_CoreMvc.Models.AuthenticModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<form asp-action="Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Find by Controller Name: <input type="text" class="col-lg-3 form-control" name="SearchString" value="@ViewData["currentFilter"]" />
+            <input type="submit" value="Search" class="btn-primary" /> |
+            <a asp-action="Index">Back to Full List</a>
+        </p>
+    </div>
+</form>
+<p>
+    <a asp-action="Create"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RoleId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ControllerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Retrive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Insert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Update)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Delete)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+
+                        //var roleId = item.RoleId ;
+                        //var RoleModel =  db.Roles.FindAsync(roleId);
+                        //ViewData["RollModel"] = RoleModel.Name;
+                    }
+                    @Html.DisplayFor(modelItem => item.Role.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ControllerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Retrive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Insert)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Update)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Delete)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

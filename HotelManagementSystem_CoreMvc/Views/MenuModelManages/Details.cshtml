@@ -1,0 +1,48 @@
+﻿@model HotelManagementSystem_CoreMvc.Models.MenuModelManage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MenuModelManage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Retrive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Retrive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Insert)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Insert)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Update)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Update)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Delete)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Delete)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MenuModel)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MenuModel.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
